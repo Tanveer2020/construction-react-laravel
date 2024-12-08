@@ -39,10 +39,15 @@ const Show = () => {
         });
         const result = await res.json();
         if(result.status == true) {
-            toast.success(result.message);
+            
             const newProjects = projects.filter(project => project.id != id)
             setProjects(newProjects)
+            toast.success(result.message);
+
+        } else {
+            toast.error(result.message)
         }
+        
 
    
          

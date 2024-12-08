@@ -15,6 +15,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from './components/backend/Dashboard';
 import RequireAuth from './components/common/RequireAuth';
+
 import {default as ShowServices} from './components/backend/services/Show';
 import {default as CreateService} from './components/backend/services/Create';
 import {default as EditService} from './components/backend/services/Edit';
@@ -22,6 +23,14 @@ import {default as EditService} from './components/backend/services/Edit';
 import {default as ShowProjects} from './components/backend/projects/Show';
 import  {default as CreateProject} from './components/backend/projects/Create';
 import  {default as EditProject} from './components/backend/projects/Edit';
+
+import {default as ShowArticles} from './components/backend/articles/Show';
+import {default as CreateArticle} from './components/backend/articles/Create';
+import {default as EditArticle} from './components/backend/articles/Edit';
+
+
+
+
 
 
 
@@ -107,7 +116,34 @@ function App() {
           
         </RequireAuth>
         
-        } />       
+        } />
+        
+        <Route path='/admin/articles' element = {
+        <RequireAuth>
+         
+         <ShowArticles/>
+          
+        </RequireAuth>
+        
+        } />
+        
+        <Route path='/admin/articles/create' element = {
+        <RequireAuth>
+         
+         <CreateArticle/>
+          
+        </RequireAuth>
+        
+        } /> 
+
+        <Route path='/admin/articles/edit:id' element = {
+        <RequireAuth>
+         
+         <EditArticle/>
+          
+        </RequireAuth>
+        
+        } /> 
 
 
       

@@ -3,6 +3,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\ProjectController;
 use App\Http\Controllers\admin\ServiceController;
+use App\Http\Controllers\admin\ArticleController;
 use App\Http\Controllers\admin\TempImageController;
 use App\Http\Controllers\front\ServiceController as FrontServiceController;
 use App\Http\Controllers\front\ProjectController as FrontProjectController;
@@ -60,7 +61,13 @@ Route::group(['middleware' => ['auth:sanctum']],function(){
     Route::delete('projects/{id}',[ProjectController::class,'destroy']);
 
 
+    // Article Routes
 
+    Route::post('articles',[ArticleController::class,'store']);
+    Route::get('articles',[ArticleController::class,'index']);
+    Route::get('articles/{id}',[ArticleController::class,'show']);
+    Route::put('articles/{id}',[ArticleController::class,'update']);
+    Route::delete('articles/{id}',[ArticleController::class,'destroy']);
 
 
 
