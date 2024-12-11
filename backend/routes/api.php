@@ -7,6 +7,8 @@ use App\Http\Controllers\admin\ArticleController;
 use App\Http\Controllers\admin\TempImageController;
 use App\Http\Controllers\front\ServiceController as FrontServiceController;
 use App\Http\Controllers\front\ProjectController as FrontProjectController;
+use App\Http\Controllers\front\ArticleController as FrontArticleController;
+
 
 
 
@@ -30,6 +32,10 @@ Route::get('get-latest-services',[FrontServiceController::class,'latestServices'
 
 Route::get('get-projects',[FrontProjectController::class,'index']);
 Route::get('get-latest-projects',[FrontProjectController::class,'latestProjects']);
+
+
+Route::get('get-articles',[FrontArticleController::class,'index']);
+Route::get('get-latest-articles',[FrontArticleController::class,'latestArticles']);
 
 
 

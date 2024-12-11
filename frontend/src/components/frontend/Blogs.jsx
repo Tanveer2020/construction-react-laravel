@@ -1,11 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../common/Header'
 import Footer from '../common/Footer'
 import Hero from '../common/Hero'
 import BlogImg from '../../assets/images/construction3.jpg';
+import { apiUrl, fileUrl } from '../common/http';
 
 
 export const Blogs = () => {
+
+
+  const [articles,setArticles] = useState([]);
+ 
+  const fetchLatestArticles = async() => {
+   const res = await fetch(apiUrl+'get-articles',{
+       method :'GET'
+     
+   });
+   const result = await res.json();
+   
+   if(result.status == true) {
+       setArticles(result.data)
+   }
+
+
+  }
+
+  useEffect(()=> {
+ 
+   fetchLatestArticles ()
+
+  },[]);
+
   return (
     <>
     <Header/>
@@ -22,49 +47,37 @@ export const Blogs = () => {
             <p>We offer a diverse array of construction services, spanning residential, commercial, and industrial projects.</p>
             </div>
             <div className='row pt-3'>
-              <div className='col-md-4'>
-                <div className='card shadow border-0'>
-                  <div className='card-img-top'>
-                    <img src={BlogImg} alt = '' className='w-100' />
-                  </div>
-                  <div className='card-body p-4'>
-                    <div className='mb-3'>
-                      <a href='#' className='title'>Dummy blog title</a>
-                    </div>
-                    <a href='#' className='btn btn-primary small'>Read More</a>
 
-                  </div>
-                </div>
-              </div>
-              <div className='col-md-4'>
-                <div className='card shadow border-0'>
-                  <div className='card-img-top'>
-                    <img src={BlogImg} alt = '' className='w-100' />
-                  </div>
-                  <div className='card-body p-4'>
-                    <div className='mb-3'>
-                      <a href='#' className='title'>Dummy blog title</a>
-                    </div>
-                    <a href='#' className='btn btn-primary small'>Read More</a>
+{
+  articles && articles.map(article => {
 
-                  </div>
-                </div>
-              </div>
-              <div className='col-md-4'>
-                <div className='card shadow border-0'>
-                  <div className='card-img-top'>
-                    <img src={BlogImg} alt = '' className='w-100' />
-                  </div>
-                  <div className='card-body p-4'>
-                    <div className='mb-3'>
-                      <a href='#' className='title'>Dummy blog title</a>
-                    </div>
-                    <a href='#' className='btn btn-primary small'>Read More</a>
+    
 
-                  </div>
-                </div>
-              </div>
-            </div>
+    return (
+
+      <div className='col-md-4 mb-4'>
+    <div className='card shadow border-0'>
+      <div className='card-img-top'>
+      <img src={`${fileUrl}uploads/articles/small/${article.image}`} alt='' className='w-100'/>
+
+      </div>
+      <div className='card-body p-4'>
+
+        <div className='mb-3'>
+          <a href='#' className='title'>{article.title}</a>
+        </div>
+        <a href='#' className='btn btn-primary small'>Read More</a>
+
+      </div>
+    </div>
+  </div>
+
+    )
+  })
+}
+
+
+</div>
 
           </div>
         </section> 

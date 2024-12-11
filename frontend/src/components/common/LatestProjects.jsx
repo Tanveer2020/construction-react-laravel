@@ -39,7 +39,7 @@ const LatestProjects = () => {
             projects && projects.map(project => {
             
             return    (
-                    <div className='col-md-3 col-lg-3'>
+                    <div key = {`project-${project.id}`} className='col-md-3 col-lg-3'>
                     <div className='item'>
                       <div className='service-image'>
                       <img src={`${fileUrl}uploads/projects/small/${project.image}`} alt='' className='w-100'/>

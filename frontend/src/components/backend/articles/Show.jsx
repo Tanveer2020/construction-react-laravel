@@ -18,6 +18,10 @@ const Show = () => {
         }
      });
 
+     const result = await res.json();
+     setArticles(result.data);
+    }
+
 
     
      const deleteArticle = async (id) => {
@@ -34,19 +38,20 @@ const Show = () => {
             });
             const result = await res.json();
             if(result.status == true) {
+                
                 const newArticles = articles.filter(article => article.id != id)
-                setArticles(newArticles);
+                setArticles(newArticles)
                 toast.success(result.message);
-
+    
             } else {
                 toast.error(result.message)
             }
-    
-       
+        
              
     
         }
-     }
+    
+    }
 
 
 
@@ -54,9 +59,7 @@ const Show = () => {
         fetchArticles(); 
         }, [])
 
-     const result = await res.json();
-     setArticles(result.data);
-    }
+    
   
     return (
 
@@ -85,11 +88,13 @@ const Show = () => {
                 </div>           
                 <hr/>
                 <table className='table table-striped'>
-                    <thead>
+                    
+
+
+                <thead>
                         <tr>
                             <th>ID</th>
                             <th>Title</th>
-                            {/* <th>Slug</th> */}
                             <th>Status</th>
                             <th>Action</th>
 
@@ -97,21 +102,19 @@ const Show = () => {
                     </thead>
                     <tbody>
                         {
-
-                                articles &&   articles.map(  article => {
-                                    return (
-                                        <tr key={`article-${article.id}`}>
-                                <td>{article.id}</td>
-                                <td>{article.title}</td>
-                                <td>{article.slug}</td>
-                                <td>
-                                    {
-                                    (article.status == 1) ? 'Active' : 'Block'
-                                    }
-                                </td>
+                            articles &&  articles.map( article => {
+                                return (
+                                    <tr key={`article-${article.id}`}>
+                            <td>{article.id}</td>
+                            <td>{article.title}</td>
+                            <td>
+                                {
+                                (article.status == 1) ? 'Active' : 'Block'
+                                }
+                            </td>
                             <td>
                                 <Link to={`/admin/articles/edit/${article.id}`} className='btn btn-primary btn-sm'>Edit</Link>
-                                <Link onClick={() => deleteProject(article.id)} to="#"className='btn btn-secondary btn-sm ms-2'>Delete</Link>
+                                <Link onClick={() => deleteArticle(article.id)} to="#"className='btn btn-secondary btn-sm ms-2'>Delete</Link>
 
                             </td>
 

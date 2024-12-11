@@ -47,9 +47,7 @@ const Show = () => {
         } else {
             toast.error(result.message)
         }
-        
-
-   
+    
          
 
     }
