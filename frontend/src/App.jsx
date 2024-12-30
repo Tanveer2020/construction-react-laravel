@@ -28,9 +28,17 @@ import {default as ShowArticles} from './components/backend/articles/Show';
 import {default as CreateArticle} from './components/backend/articles/Create';
 import {default as EditArticle} from './components/backend/articles/Edit';
 
+import {default as ShowTestimonials} from './components/backend/testimonials/Show';
+import {default as CreateTestimonial} from './components/backend/testimonials/Create';
+import {default as EditTestimonial} from './components/backend/testimonials/Edit';
 
 
-
+import {default as ShowMembers} from './components/backend/members/Show';
+import {default as CreateMember} from './components/backend/members/Create';
+import {default as EditMember} from './components/backend/members/Edit';
+import ServiceDetail from './components/frontend/ServiceDetail';
+import ProjectDetail from './components/frontend/ProjectDetail';
+import BlogDetail from './components/frontend/BlogDetail';
 
 
 
@@ -52,6 +60,9 @@ function App() {
       <Route path='/projects' element = {<Projects/>} />
       <Route path='/blogs' element = {<Blogs/>} />
       <Route path='/contact' element = {<ContactUs/>} />
+      <Route path='/service/:id' element = {<ServiceDetail/>} />
+      <Route path='/project/:id' element = {<ProjectDetail/>} />
+      <Route path='/blog/:id' element = {<BlogDetail/>} />
       <Route path='/admin/login' element = {<Login/>} />
       <Route path='/admin/dashboard' element = {
         <RequireAuth>
@@ -136,7 +147,7 @@ function App() {
         
         } /> 
 
-        <Route path='/admin/articles/edit:id' element = {
+        <Route path='/admin/articles/edit/:id' element = {
         <RequireAuth>
          
          <EditArticle/>
@@ -144,6 +155,64 @@ function App() {
         </RequireAuth>
         
         } /> 
+
+
+        <Route path='/admin/testimonials' element = {
+        <RequireAuth>
+         
+         <ShowTestimonials/>
+          
+        </RequireAuth>
+        
+        } />
+
+       <Route path='/admin/testimonials/create' element = {
+        <RequireAuth>
+         
+         <CreateTestimonial/>
+          
+        </RequireAuth>
+        
+        } />
+
+       <Route path='/admin/testimonials/edit/:id' element = {
+        <RequireAuth>
+         
+         <EditTestimonial/>
+
+          
+        </RequireAuth>
+        
+        } /> 
+
+
+        <Route path='/admin/members' element = {
+        <RequireAuth>
+         
+         <ShowMembers/>
+          
+        </RequireAuth>
+        
+        } />
+
+        <Route path='/admin/members/create' element = {
+        <RequireAuth>
+         
+         <CreateMember/>
+          
+        </RequireAuth>
+        
+        } />
+
+        <Route path='/admin/members/edit/:id' element = {
+        <RequireAuth>
+         
+         <EditMember/>
+          
+        </RequireAuth>
+        
+        } />
+
 
 
       

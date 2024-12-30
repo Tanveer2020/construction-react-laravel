@@ -84,11 +84,7 @@ class ProjectController extends Controller
                 $project->image = $fileName;
                 $project->save();
 
-                // if($oldImage != '') {
-                //     File::delete(public_path('uploads/services/large/'.$oldImage));
-                //     File::delete(public_path('uploads/services/small/'.$oldImage));
-    
-                // }
+               
 
             
             }

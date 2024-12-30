@@ -88,11 +88,6 @@ class ServiceController extends Controller
             $model->image = $fileName;
             $model->save();
 
-            if($oldImage != '') {
-                File::delete(public_path('uploads/services/large/'.$oldImage));
-                File::delete(public_path('uploads/services/small/'.$oldImage));
-
-            }
            
         }
       }

@@ -2,8 +2,40 @@ import React from 'react'
 import Header from '../common/Header'
 import Footer from '../common/Footer'
 import Hero from '../common/Hero'
+import { useForm } from 'react-hook-form'
+import { apiUrl } from '../common/http'
+import { toast } from 'react-toastify'
 
 export const ContactUs = () => {
+
+    const onSubmit = async (data) => {
+
+        const res = await fetch(apiUrl+'contact-now',{
+            method: 'POST',
+            headers:{
+                'Content-type' : 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await res.json();
+                 
+          if(result.status == true) {
+            toast.success(result.message);
+            reset();
+    } else {
+        toast.error(result.message);   
+    }
+
+    }
+const {
+     register,
+     handleSubmit,
+     watch,
+     reset,
+     formState: { errors },
+   } = useForm()
+
   return (
     
     <>
@@ -49,34 +81,83 @@ Lucknow.Uttar Pardesh 226017<br/>
                 <div className='col-md-9'>
                     <div className='card shadow border-0'>
                         <div className='card-body p-5'>
-                        <form action=''>
+                        <form onSubmit = {handleSubmit(onSubmit)}>
                             <div className='row'>
                                 <div className='col-md-6 mb-4'>
                                     <label htmlFor='' className='form-label'>Name</label>
-                                    <input type='text' className='form-control form-control-lg' placeholder='Enter Name'/>
+                                    <input type='text'
+                                    
+                                    {
+                                        ...register('name',{
+                                            required: "The name field is required"
+                                        })
+                                    }
+                                    
+                                    className={`form-control form-control-lg ${errors.name && 'is-invalid'}`}  placeholder='Enter Name'/>
+
+{
+                                errors.name && <p className='invalid-feedback'>{errors.name?.message}</p>
+                                 }
 
                                 </div>
                                 <div className='col-md-6 mb-4'>
                                 <label htmlFor='' className='form-label'>Email</label>
-                                <input type='text' className='form-control form-control-lg' placeholder='Enter Email'/>
+                                <input type='text'
+                                
+                                {
+                                    ...register('email',{
+                                        required: "The email is required",
+                                      pattern: {
+                                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                          message: "invalid email address"
+                                      }
+                                    })
+                                 }
+                                
+                                 className={`form-control form-control-lg ${errors.email && 'is-invalid'}`} placeholder='Enter Email'/>
+                                
+                                 {
+                                errors.email && <p className='invalid-feedback'>{errors.email?.message}</p>
+                                 }
                                     
                                     </div>
                             </div>
                             <div className='row'>
                                 <div className='col-md-6 mb-4'>
                                     <label htmlFor='' className='form-label'>Phone</label>
-                                    <input type='text' className='form-control form-control-lg' placeholder='Phone No.'/>
+                                    <input type='text'
+                                    
+                                    {
+                                        ...register('phone')
+                                     
+                                    }
+                                    className='form-control form-control-lg' placeholder='Phone No.'/>
 
                                 </div>
                                 <div className='col-md-6 mb-4'>
                                 <label htmlFor='' className='form-label'>Subject</label>
-                                <input type='text' className='form-control form-control-lg' placeholder='Enter Subject'/>
+                                <input type='text'
+                                
+                                  
+                                {
+                                    ...register('subject')
+                                 
+                                }
+                                className='form-control form-control-lg' placeholder='Enter Subject'/>
                                     
                                     </div>
                             </div>
                             <div>
                                 <label htmlFor='' className='form-label'>Message</label>
-                                <textarea name='' placeholder='Message' rows = {5} id = ''
+                                <textarea  
+                                
+                                    
+                                {
+                                    ...register('message')
+                                 
+                                }
+                                
+                                placeholder='Message' rows = {5} id = ''
                                 className='form-control form-control-lg'></textarea>
                             </div>
                             <button className='btn btn-primary large mt-3'>Submit</button>

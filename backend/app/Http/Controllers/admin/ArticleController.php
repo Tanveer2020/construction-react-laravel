@@ -104,11 +104,7 @@ class ArticleController extends Controller
                     $article->image = $fileName;
                     $article->save();
     
-                    // if($oldImage != '') {
-                    //     File::delete(public_path('uploads/services/large/'.$oldImage));
-                    //     File::delete(public_path('uploads/services/small/'.$oldImage));
-        
-                    // }
+                   
     
                 
                 }

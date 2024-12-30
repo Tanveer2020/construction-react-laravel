@@ -36,4 +36,22 @@ class ProjectController extends Controller
 
 
     }
+
+    // this method will return single article
+     public function project($id) {
+        $project = Project::find($id);
+
+            if($project == null) {
+                return response()->json([
+                    'status' => true,
+                    'message'   => 'Project not found'
+                ]);
+
+     }
+
+                   return response()->json([
+                    'status' => true,
+                    'data'   => $project
+                ]);  
+     }
 }

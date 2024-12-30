@@ -4,6 +4,7 @@ import Footer from '../common/Footer'
 import  Hero  from '../common/Hero'
 import ServiceImg from '../../assets/images/construction1.jpg';
 import { apiUrl, fileUrl } from '../common/http';
+import { Link } from 'react-router-dom';
 
 
 
@@ -57,7 +58,7 @@ const Services = () => {
                             <div className='service-content'>
                               <p>{service.short_desc}</p>
                             </div>
-                            <a href='#' className='btn btn-primary'>Read More</a>
+                            <Link to ={`/service/${service.id}`} className='btn btn-primary'>Read More</Link>
                           </div>
                         </div>
                       </div>      
